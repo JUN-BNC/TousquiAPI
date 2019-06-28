@@ -1,0 +1,18 @@
+package com.edgenda.bnc.skillsmanager.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+    Optional<Employee> findById(Long id);
+
+    @Query("SELECT employee FROM Employee employee JOIN employee.skills skill WHERE skill.id = ?1")
+    List<Employee> findBySkillId(Long skillId);
+
+}
